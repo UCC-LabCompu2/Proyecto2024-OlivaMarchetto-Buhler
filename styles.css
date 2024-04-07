@@ -16,5 +16,32 @@
   }
   
   nav{
-    text-align: center;
+    justify-content: center;
+    background-color: var(--Pure-White, #fff);
+    display: flex;
+    padding: 18px 64px;
+  }
+
+  .columns {
+    justify-content: center;
+    background-color: var(--Pure-White, #fff);
+    display: flex;
+    flex-direction: row;
+    padding: 18px 64px;
+  }
+
+  .column-1 {
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+    width: 54%;
+    margin-left: 0px;
+  }
+
+  .column-2 {
+    display: flex;
+    flex-direction: column;
+    line-height: normal;
+    width: 46%;
+    margin-left: 20px;
   }
