@@ -4,12 +4,12 @@ const ctx = canvas.getContext('2d');
 
 let positionY = 0;
 const acceleration = 0.1;
-const initialVelocity = 0;
+let initialVelocity = 0;
 
 document.querySelector('.calc-result').addEventListener('click', function() {
-    var distance = parseFloat(document.getElementById('distance').value);
-    var velocity = parseFloat(document.getElementById('velocity').value);
-    var time = parseFloat(document.getElementById('time').value);
+    let distance = parseFloat(document.getElementById('distance').value);
+    let velocity = parseFloat(document.getElementById('velocity').value);
+    let time = parseFloat(document.getElementById('time').value);
 
     // Validar que se hayan completado exactamente 2 de los 3 campos
     const fields = [distance, velocity, time];
@@ -39,10 +39,9 @@ document.querySelector('.calc-result').addEventListener('click', function() {
         time = missingField;
     }
 
-    const initialVelocity = distance / time;
+    let initialVelocity = distance / time;
   
     let positionY = 0;
-    const acceleration = 0.1;
   
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   
@@ -64,9 +63,9 @@ document.querySelector('.calc-result').addEventListener('click', function() {
     animate();
 });
 
-var unitInit = 'km';
+let unitInit = 'km';
 
-function convertUnits(value, currentUnit, targetUnit, targetUnitKey) {
+function convertUnits(value, currentUnit, targetUnit, conversionType) {
 
     // Definir factores de conversión para distancia, tiempo y velocidad
     const conversionFactors = {
@@ -83,7 +82,7 @@ function convertUnits(value, currentUnit, targetUnit, targetUnitKey) {
     };
 
     // Realizar la conversión
-    const conversionFactor = conversionFactors[currentUnit][targetUnitKey][targetUnit];
+    const conversionFactor = conversionFactors[currentUnit][conversionType][targetUnit];
     const convertedValue = value * conversionFactor;
 
     return convertedValue;
@@ -91,9 +90,9 @@ function convertUnits(value, currentUnit, targetUnit, targetUnitKey) {
 
 
 document.getElementById('unit-converter').addEventListener('change', function() {
-    let distanceValue = parseFloat(document.getElementById('distance').value);
-    let timeValue = parseFloat(document.getElementById('time').value);
-    let velocityValue = parseFloat(document.getElementById('velocity').value);
+    const distanceValue = parseFloat(document.getElementById('distance').value);
+    const timeValue = parseFloat(document.getElementById('time').value);
+    const velocityValue = parseFloat(document.getElementById('velocity').value);
 
     const convertUnit = document.getElementById('unit-converter').value;
 
