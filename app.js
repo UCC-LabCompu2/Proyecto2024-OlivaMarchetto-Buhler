@@ -64,20 +64,41 @@ document.querySelector('.calc-result').addEventListener('click', function() {
     animate();
 });
 
-// Agrega un event listener para el cambio en el select de velocidad
-document.getElementById('unit-converter').addEventListener('change', function() {
-    // Obtén la velocidad actual
-    let velocity = parseFloat(document.getElementById('velocity').value);
+var unitInit = 'm';
 
-    // Obtén la unidad seleccionada en el select de velocidad
-    const velocityUnit = document.getElementById('unit-converter').value;
-
-    // Realizar la conversión si es necesario
-    if (velocityUnit === 'km/h') {
-        // Convertir velocidad a kilómetros por hora (1 m/s = 3.6 km/h)
-        velocity *= 3.6;
+function convertUnits(value, currentUnit, targetUnit) {
+ 
+    // Validar que el valor no sea null o 0
+    if (!value || value === 0) {
+        // Mostrar un mensaje de error usando toastify
+        alert('Por favor, ingrese un valor válido.');
+        return null;
     }
 
-    // Actualizar el valor del campo de velocidad
-    document.getElementById('velocity').value = velocity.toFixed(2);
+    // Definir factores de conversión
+    const conversionFactors = {
+        'm': { 'km': 0.001, 'dm': 10, 'mm': 1000, 'cm': 100 },
+        'km': { 'm': 1000, 'dm': 10000, 'mm': 1000000, 'cm': 100000 },
+        'dm': { 'm': 0.1, 'km': 0.0001, 'mm': 100, 'cm': 10 },
+        'mm': { 'm': 0.001, 'km': 0.000001, 'dm': 0.01, 'cm': 0.1 },
+        'cm': { 'm': 0.01, 'km': 0.00001, 'dm': 0.1, 'mm': 10 }
+    };
+
+    // Realizar la conversión
+    const conversionFactor = conversionFactors[currentUnit][targetUnit];
+    const convertedValue = value * conversionFactor;
+
+    return convertedValue;
+}
+
+document.getElementById('unit-converter').addEventListener('change', function() {
+    let distanceValue = parseFloat(document.getElementById('distance').value);
+
+    const distanceUnit = document.getElementById('unit-converter').value;
+
+    const convertedDistance = convertUnits(distanceValue, unitInit, distanceUnit);
+
+    unitInit = distanceUnit;
+
+    document.getElementById('distance').value = convertedDistance.toFixed(2);
 });
