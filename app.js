@@ -1,14 +1,38 @@
-// Agrega un event listener para el botón de cálculo
+
+const canvas = document.getElementById('myCanvas');
+const ctx = canvas.getContext('2d');
+
+let positionY = 0;
+const acceleration = 0.1;
+const initialVelocity = 0;
+
 document.querySelector('.calc-result').addEventListener('click', function() {
-    // Obtén los valores de los campos de entrada
-    const distance = parseFloat(document.querySelector('#distance').value);
-    const velocity = parseFloat(document.querySelector('#velocity').value);
-    const time = parseFloat(document.querySelector('#time').value);
 
-    // Realiza el cálculo (aquí puedes agregar tu lógica)
-    // Por ejemplo, calcular la velocidad promedio
-    const averageSpeed = (distance / time).toFixed(2); // Redondea a 2 decimales
+    const distance = parseFloat(document.getElementById('distance').value);
+    // const velocity = parseFloat(document.getElementById('velocity').value);
+    const time = parseFloat(document.getElementById('time').value);
+  
+    const initialVelocity = distance / time;
+  
+    let positionY = 0;
+    const acceleration = 0.1;
+  
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+    function animate() {
 
-    // Muestra el resultado en la consola (aquí puedes mostrarlo en otro lugar de tu página)
-    console.log('Velocidad promedio:', averageSpeed);
+      const velocity = initialVelocity + acceleration;
+      positionY += velocity;
+      
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      ctx.beginPath();
+      ctx.arc(canvas.width / 2, positionY, 10, 0, Math.PI * 2);
+      ctx.fillStyle = 'blue';
+      ctx.fill();
+      
+      requestAnimationFrame(animate);
+    }
+  
+    animate();
 });
