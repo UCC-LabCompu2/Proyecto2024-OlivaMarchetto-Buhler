@@ -64,10 +64,9 @@ document.querySelector('.calc-result').addEventListener('click', function() {
     animate();
 });
 
-var unitInit = 'm';
+var unitInit = 'km';
 
-function convertUnits(value, currentUnit, targetUnit) {
- 
+function convertUnits(value, currentUnit, targetUnit, targetUnitKey) {
     // Validar que el valor no sea null o 0
     if (!value || value === 0) {
         // Mostrar un mensaje de error usando toastify
@@ -75,30 +74,42 @@ function convertUnits(value, currentUnit, targetUnit) {
         return null;
     }
 
-    // Definir factores de conversión
+    // Definir factores de conversión para distancia, tiempo y velocidad
     const conversionFactors = {
-        'm': { 'km': 0.001, 'dm': 10, 'mm': 1000, 'cm': 100 },
-        'km': { 'm': 1000, 'dm': 10000, 'mm': 1000000, 'cm': 100000 },
-        'dm': { 'm': 0.1, 'km': 0.0001, 'mm': 100, 'cm': 10 },
-        'mm': { 'm': 0.001, 'km': 0.000001, 'dm': 0.01, 'cm': 0.1 },
-        'cm': { 'm': 0.01, 'km': 0.00001, 'dm': 0.1, 'mm': 10 }
+        'm': {
+            'distance':{ 'km': 0.001 },
+            'time':{ 'km': 1/3600 }, 
+            'velocity':{ 'km': 3.6}
+        },
+        'km': {
+            'distance':{ 'm': 1000 }, 
+            'time':{ 'm': 3600}, 
+            'velocity':{ 'm': 1/3.6 }
+        }
     };
 
     // Realizar la conversión
-    const conversionFactor = conversionFactors[currentUnit][targetUnit];
+    const conversionFactor = conversionFactors[currentUnit][targetUnitKey][targetUnit];
     const convertedValue = value * conversionFactor;
 
     return convertedValue;
 }
 
+
 document.getElementById('unit-converter').addEventListener('change', function() {
     let distanceValue = parseFloat(document.getElementById('distance').value);
+    let timeValue = parseFloat(document.getElementById('time').value);
+    let velocityValue = parseFloat(document.getElementById('velocity').value);
 
-    const distanceUnit = document.getElementById('unit-converter').value;
+    const convertUnit = document.getElementById('unit-converter').value;
 
-    const convertedDistance = convertUnits(distanceValue, unitInit, distanceUnit);
+    const convertedDistance = convertUnits(distanceValue, unitInit, convertUnit, 'distance');
+    const convertedTime = convertUnits(timeValue, unitInit, convertUnit, 'time');
+    const convertedVelocity = convertUnits(velocityValue, unitInit, convertUnit, 'velocity');
 
-    unitInit = distanceUnit;
+    unitInit = convertUnit;
 
     document.getElementById('distance').value = convertedDistance.toFixed(2);
+    document.getElementById('time').value = convertedTime.toFixed(2);
+    document.getElementById('velocity').value = convertedVelocity.toFixed(2);
 });
