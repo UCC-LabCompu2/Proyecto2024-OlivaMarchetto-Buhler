@@ -1,47 +1,99 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
 .container {
-    justify-content: center;
-    background-color: var(--Pure-White, #fff);
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-  }
-  
-  .img {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+nav {
+  width: 100%;
+  padding: 18px 0;
+  text-align: center;
+}
+
+.nav-img {
     object-fit: auto;
     object-position: center;
-    width: 100%;
+    width: 90%;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     align-self: center;
     max-width: 1244px;
   }
-  
-  nav{
-    justify-content: center;
-    background-color: var(--Pure-White, #fff);
+
+.header {
+  text-align: center;
+}
+
+.title {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.columns {
     display: flex;
-    padding: 18px 64px;
+    justify-content: center;
+    align-items: stretch;
+    gap: 20px;
+    width: 90%;
   }
 
-  .columns {
-    justify-content: center;
-    background-color: var(--Pure-White, #fff);
-    display: flex;
-    flex-direction: row;
-    padding: 18px 64px;
-  }
+.column-1 {
+  flex: 1;
+  max-width: 50%;
+}
 
-  .column-1 {
+.paragraph {
+  text-align: justify;
+}
+
+.calculation, .column-2 {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.calc-title, .result-title {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.calc-description {
+  font-size: 0.9em;
+  margin-bottom: 15px;
+}
+
+.calc-field {
+  margin-bottom: 5px;
+}
+
+.canvas-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.column-2 {
     display: flex;
     flex-direction: column;
     line-height: normal;
-    width: 54%;
-    margin-left: 0px;
-  }
-
-  .column-2 {
-    display: flex;
-    flex-direction: column;
-    line-height: normal;
-    width: 46%;
     margin-left: 20px;
+  }
+  
+canvas {
+    flex: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccc;
+  }
+.column-1, .column-2 {
+    flex: 1;
   }
