@@ -63,3 +63,21 @@ document.querySelector('.calc-result').addEventListener('click', function() {
   
     animate();
 });
+
+// Agrega un event listener para el cambio en el select de velocidad
+document.getElementById('unit-converter').addEventListener('change', function() {
+    // Obtén la velocidad actual
+    let velocity = parseFloat(document.getElementById('velocity').value);
+
+    // Obtén la unidad seleccionada en el select de velocidad
+    const velocityUnit = document.getElementById('unit-converter').value;
+
+    // Realizar la conversión si es necesario
+    if (velocityUnit === 'km/h') {
+        // Convertir velocidad a kilómetros por hora (1 m/s = 3.6 km/h)
+        velocity *= 3.6;
+    }
+
+    // Actualizar el valor del campo de velocidad
+    document.getElementById('velocity').value = velocity.toFixed(2);
+});
