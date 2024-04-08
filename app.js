@@ -71,14 +71,14 @@ function convertUnits(value, currentUnit, targetUnit, targetUnitKey) {
     // Definir factores de conversión para distancia, tiempo y velocidad
     const conversionFactors = {
         'm': {
-            'distance':{ 'km': 0.001 },
-            'time':{ 'km': 1/3600 }, 
-            'velocity':{ 'km': 3.6}
+            'distance':{ 'km': 0.001, 'm': 1 },
+            'time':{ 'km': 1/3600, 'm': 1/60 }, 
+            'velocity':{ 'km': 3.6, 'm': 1}
         },
         'km': {
-            'distance':{ 'm': 1000 }, 
-            'time':{ 'm': 3600}, 
-            'velocity':{ 'm': 1/3.6 }
+            'distance':{ 'm': 1000, 'km': 1 }, 
+            'time':{ 'm': 3600, 'km': 1 }, 
+            'velocity':{ 'm': 1/3.6, 'km': 1}
         }
     };
 
@@ -91,35 +91,21 @@ function convertUnits(value, currentUnit, targetUnit, targetUnitKey) {
 
 
 document.getElementById('unit-converter').addEventListener('change', function() {
-    try {
-        let distanceValue = parseFloat(document.getElementById('distance').value);
-        let timeValue = parseFloat(document.getElementById('time').value);
-        let velocityValue = parseFloat(document.getElementById('velocity').value);
-
-        checkValue = !distanceValue || value === 0 ? 1 : 0;
-        checkValue = !timeValue || value === 0 ? 1 : checkValue;
-        checkValue = !velocityValue || value === 0 ? 1 : checkValue;
-
-    } catch {
-        Toastify({
-            text: "Ingrese valores válidos.",
-            background: "linear-gradient(to right, #FF9800, #F44336)",
-            duration: 3000
-        }).showToast();
-        return;
-    }
-
-    // Validar que el valor no sea null o 0
-    if (checkValue === 1) {
-        Toastify({
-            text: "Ingrese valores válidos.",
-            background: "linear-gradient(to right, #FF9800, #F44336)",
-            duration: 3000
-        }).showToast();
-        return;
-    }
+    let distanceValue = parseFloat(document.getElementById('distance').value);
+    let timeValue = parseFloat(document.getElementById('time').value);
+    let velocityValue = parseFloat(document.getElementById('velocity').value);
 
     const convertUnit = document.getElementById('unit-converter').value;
+
+    if (isNaN(distanceValue) || isNaN(timeValue) || isNaN(velocityValue) || distanceValue === 0 || timeValue === 0 || velocityValue === 0) {    
+        unitInit = convertUnit;
+        Toastify({
+            text: "Por favor, ingrese valores válidos para la conversión.",
+            background: "linear-gradient(to right, #FF9800, #F44336)",
+            duration: 3000
+        }).showToast();
+        return;
+    }
 
     const convertedDistance = convertUnits(distanceValue, unitInit, convertUnit, 'distance');
     const convertedTime = convertUnits(timeValue, unitInit, convertUnit, 'time');
