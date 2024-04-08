@@ -107,17 +107,32 @@ canvas {
   }
 
 .calc-result {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
+    color:  #007bff;
+    border-color: #007bff;
     padding: 10px 20px;
     font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
   }
-  
-.calc-result:hover {
-    background-color: #0056b3;
+
+#unit-converter {
+    color:  #007bff;
+    border-color: #007bff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+.option-value {
+    background-color: #fff;
+    color:  #007bff;
+    border-color: #007bff;
+  } 
+
+.calc-result:hover, #unit-converter:hover {
+    background-color: #007bff;
+    color: #fff;
   }
   
   @media (max-width: 991px) {
@@ -144,4 +159,3 @@ canvas {
       padding: 0px 0px 20px 0px;
     }
   }
-  
