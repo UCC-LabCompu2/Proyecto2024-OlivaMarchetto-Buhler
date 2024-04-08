@@ -58,7 +58,7 @@ nav {
   padding: 20px;
 }
 
-.calc-title, .result-title {
+.calc-title, .calc-result {
   font-weight: bold;
   font-size: 1.2em;
   margin-bottom: 10px;
@@ -72,6 +72,14 @@ nav {
 .calc-field {
   margin-bottom: 5px;
 }
+
+.calc-field input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
 
 .canvas-title {
   text-align: center;
@@ -96,4 +104,18 @@ canvas {
   }
 .column-1, .column-2 {
     flex: 1;
+  }
+
+.calc-result {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+.calc-result:hover {
+    background-color: #0056b3;
   }
