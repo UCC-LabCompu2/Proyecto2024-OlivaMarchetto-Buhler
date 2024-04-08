@@ -71,6 +71,9 @@ header {
 
 .calc-field {
   margin-bottom: 5px;
+  align-items: stretch;
+  display: flex;
+  justify-content: center;
 }
 
 .calc-field input[type="number"] {
@@ -80,8 +83,14 @@ header {
     border-radius: 5px;
     box-sizing: border-box;
   }
+  
+.calc-field label {
+    width: 125px;
+    padding: 8px;
+    box-sizing: border-box;
+  }
 
-.canvas-title {
+  .canvas-title {
   text-align: center;
   font-weight: bold;
   font-size: 1.2em;

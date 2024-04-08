@@ -37,10 +37,20 @@
         <article class="calculation">
           <div class="calc-title">Cálculo</div>
           <div class="calc-description">Rellene exactamente 2 campos:</div>
-          <div class="calc-field"><input type="number" placeholder="Distancia" id="distance"></div>
-          <div class="calc-field"><input type="number" placeholder="Velocidad" id="velocity"></div>
-          <div class="calc-field"><input type="number" placeholder="Tiempo" id="time"></div>
+          <div class="calc-field">
+            <label for="distance">Distancia:</label>
+            <input type="number" placeholder="Distancia" id="distance">
+          </div>
+          <div class="calc-field">
+            <label for="velocity">Velocidad:</label>
+            <input type="number" placeholder="Velocidad" id="velocity">
+          </div>
+          <div class="calc-field">
+            <label for="time">Tiempo:</label>
+            <input type="number" placeholder="Tiempo" id="time">
+          </div>
           <button class="calc-result">Calcular</button>
+          <label for="unit-converter"></label>
           <select id="unit-converter">
             <option value="km" class="option-value">Kilómetros por hora</option>
             <option value="m" class="option-value">Metros por segundo</option>
