@@ -18,7 +18,7 @@ document.querySelector('.calc-result').addEventListener('click', function() {
     if (completedFields.length !== 2) {
         Toastify({
             text: "Debe completar exactamente 2 de los 3 campos.",
-            backgroundColor: "linear-gradient(to right, #FF9800, #F44336)",
+            background: "linear-gradient(to right, #FF9800, #F44336)",
             duration: 3000
         }).showToast();
         return;
@@ -67,12 +67,6 @@ document.querySelector('.calc-result').addEventListener('click', function() {
 var unitInit = 'km';
 
 function convertUnits(value, currentUnit, targetUnit, targetUnitKey) {
-    // Validar que el valor no sea null o 0
-    if (!value || value === 0) {
-        // Mostrar un mensaje de error usando toastify
-        alert('Por favor, ingrese un valor válido.');
-        return null;
-    }
 
     // Definir factores de conversión para distancia, tiempo y velocidad
     const conversionFactors = {
@@ -97,9 +91,33 @@ function convertUnits(value, currentUnit, targetUnit, targetUnitKey) {
 
 
 document.getElementById('unit-converter').addEventListener('change', function() {
-    let distanceValue = parseFloat(document.getElementById('distance').value);
-    let timeValue = parseFloat(document.getElementById('time').value);
-    let velocityValue = parseFloat(document.getElementById('velocity').value);
+    try {
+        let distanceValue = parseFloat(document.getElementById('distance').value);
+        let timeValue = parseFloat(document.getElementById('time').value);
+        let velocityValue = parseFloat(document.getElementById('velocity').value);
+
+        checkValue = !distanceValue || value === 0 ? 1 : 0;
+        checkValue = !timeValue || value === 0 ? 1 : checkValue;
+        checkValue = !velocityValue || value === 0 ? 1 : checkValue;
+
+    } catch {
+        Toastify({
+            text: "Ingrese valores válidos.",
+            background: "linear-gradient(to right, #FF9800, #F44336)",
+            duration: 3000
+        }).showToast();
+        return;
+    }
+
+    // Validar que el valor no sea null o 0
+    if (checkValue === 1) {
+        Toastify({
+            text: "Ingrese valores válidos.",
+            background: "linear-gradient(to right, #FF9800, #F44336)",
+            duration: 3000
+        }).showToast();
+        return;
+    }
 
     const convertUnit = document.getElementById('unit-converter').value;
 
