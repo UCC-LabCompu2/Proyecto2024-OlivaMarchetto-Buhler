@@ -139,5 +139,9 @@ canvas {
       line-height: normal;
       margin-left: 0; /* Corregido */
     }
+    
+    .calculation, .column-2 {
+      padding: 0px 0px 20px 0px;
+    }
   }
   
