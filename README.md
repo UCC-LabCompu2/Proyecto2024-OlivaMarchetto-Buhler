@@ -21,8 +21,8 @@ La página consta de las siguientes secciones:
 
 ### Tecnologías Utilizadas
 - HTML5
-- CSS3 (con Flexbox y Media Queries para diseño responsivo)
-- JavaScript (para la lógica de cálculo y animación)
+- CSS3 (con Flexbox y Media Queries para diseño responsive)
+- JavaScript (para la lógica de cálculo y animación, y manejo de excepciones)
 - Google Fonts (fuente utilizada: Poppins)
-- Toastify.js (para mostrar mensajes de notificación)
+- Toastify.js (para mostrar mensajes de notificación y alerta)
 - GitHub Pages (para la publicación del sitio web)
