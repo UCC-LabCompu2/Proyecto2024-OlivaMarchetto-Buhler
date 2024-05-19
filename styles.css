@@ -11,12 +11,6 @@ body {
   padding: 20px;
 }
 
-nav {
-  width: 100%;
-  padding: 18px 0;
-  text-align: center;
-}
-
 .nav-img {
     object-fit: fill;
     object-position: center;
