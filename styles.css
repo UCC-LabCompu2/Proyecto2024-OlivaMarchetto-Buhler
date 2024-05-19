@@ -52,7 +52,7 @@ header {
   padding: 20px;
 }
 
-.calc-title, .calc-result {
+.calc-title {
   font-weight: bold;
   font-size: 1.2em;
   margin-bottom: 10px;
@@ -71,7 +71,7 @@ header {
 }
 
 .calc-field input[type="number"] {
-    width: 100%;
+    width: 70%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -79,7 +79,7 @@ header {
   }
   
 .calc-field label {
-    width: 125px;
+    width: 30%;
     padding: 8px;
     box-sizing: border-box;
   }
@@ -109,22 +109,40 @@ canvas {
     flex: 1;
   }
 
-.calc-result {
+
+.results {
+  margin-bottom: 5px;
+  align-items: stretch;
+  display: flex;
+  justify-content: center;
+}
+
+.results .calc-result {
+    width: 25%;
+    font-weight: bold;
+    font-size: 1.2em;
     color:  #007bff;
     border-color: #007bff;
-    padding: 10px 20px;
     font-size: 16px;
-    border-radius: 5px;
     cursor: pointer;
+    padding: 12px;
+    border-radius: 10px;
   }
 
-#unit-converter {
+.results label {
+  width: 0;
+  padding: 0;
+}
+
+.results #unit-converter {
+    width: 70%;
     color:  #007bff;
     border-color: #007bff;
-    padding: 10px 20px;
     font-size: 16px;
-    border-radius: 5px;
     cursor: pointer;
+    padding: 12px;
+    border-radius: 10px;
+    margin-left: 5%;
   }
 
 .option-value {
