@@ -1,9 +1,19 @@
 // Selecciona el canvas y su propiedad context
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
+// Definir la imagen de la nave espacial
+const spaceship = new Image();
+spaceship.src = './images/paracaidas-canvas.png'; // Ruta de la imagen de la nave espacial
 
-// Inicializa la posición en Y del objeto en el canvas
+// Ajustar el tamaño del canvas
+function resizeCanvas() {
+  canvas.width = canvas.clientWidth;
+  canvas.height = canvas.clientHeight;
+}
+
+// Inicializa la posición y velocidad de la nave espacial
 let positionY = 0;
+let velocity = 0;
 
 // Define la aceleración CONSTANTE
 const acceleration = 0.1;
@@ -61,26 +71,40 @@ document.querySelector('.calc-result').addEventListener('click', function() {
   
     // Limpiar el canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-  
-    // Dibujar el objeto en el canvas
-    function animate() {
 
-      const velocity = initialVelocity + acceleration;
-      positionY += velocity;
-      
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      ctx.beginPath();
-      ctx.arc(canvas.width / 2, positionY, 10, 0, Math.PI * 2);
-      ctx.fillStyle = 'blue';
-      ctx.fill();
-      
-      requestAnimationFrame(animate);
-    }
-  
-    animate();
+    // Iniciar la animación
+    requestAnimationFrame(animate);
 });
 
+// Función para animar la nave espacial
+function animate() {
+    resizeCanvas();
+  
+    velocity += acceleration;
+    positionY += velocity;
+  
+    // Limpiar el canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+    // Dibujar la nave espacial
+    const spaceshipWidth = 225; // Ancho de la nave espacial
+    const spaceshipHeight = 225; // Altura de la nave espacial
+    const xPos = (canvas.width - spaceshipWidth) / 2;
+  
+    ctx.drawImage(spaceship, xPos, positionY, spaceshipWidth, spaceshipHeight);
+  
+    // Repetir la animación si la nave aún está dentro del canvas
+    if (positionY < canvas.height) {
+      requestAnimationFrame(animate);
+    } else {
+      // Reiniciar la posición para bucle
+      positionY = 0;
+      velocity = 0;
+      requestAnimationFrame(animate);
+    }
+  }
+  
+  
 // Unidad de medida inicial
 let unitInit = 'km';
 
