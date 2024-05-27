@@ -17,6 +17,7 @@ document.querySelector('.calc-result').addEventListener('click', function() {
     // Validar que se hayan completado exactamente 2 de los 3 campos
     const fields = [distance, velocity, time];
     const completedFields = fields.filter(field => !isNaN(field));
+    const greaterThanZeroFields = fields.filter(field => field > 0);
   
     if (completedFields.length !== 2) {
         Toastify({
@@ -26,6 +27,16 @@ document.querySelector('.calc-result').addEventListener('click', function() {
         }).showToast();
         return;
     }
+
+    if (greaterThanZeroFields.length !== 2) {
+        Toastify({
+            text: "Los valores deben ser mayores a 0.",
+            background: "linear-gradient(to right, #FF9800, #F44336)",
+            duration: 3000
+        }).showToast();
+        return;
+    }
+  
   
     // Calcular el campo faltante
     let missingField;
