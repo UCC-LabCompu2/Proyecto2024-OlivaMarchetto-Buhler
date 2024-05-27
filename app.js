@@ -132,3 +132,94 @@ document.getElementById('unit-converter').addEventListener('change', function() 
     document.getElementById('time').value = convertedTime.toFixed(2);
     document.getElementById('velocity').value = convertedVelocity.toFixed(2);
 });
+
+// Función de validación
+function validateInput(event) {
+  const input = event.target;
+  const value = input.value;
+  const key = event.key;
+
+  // Permitir solo números, el punto decimal, y eliminar caracteres con backspace
+  const regex = /^[0-9]*\.?[0-9]*$/;
+
+  // Verificar si la tecla presionada es una letra o símbolo (excepto punto decimal y backspace)
+  if (!/[0-9.]/.test(key) && key !== "Backspace") {
+    event.preventDefault();
+    Toastify({
+        text: "Solo se permiten números y un punto decimal.",
+        background: "linear-gradient(to right, #FF9800, #F44336)",
+        duration: 3000
+    }).showToast();
+    return;
+  }
+  
+  // Si el valor contiene caracteres no numéricos o negativos
+  if (!regex.test(value) || key === "-" || (key === "." && value.includes("."))) {
+    event.preventDefault();
+    Toastify({
+        text: "Solo se permiten números positivos y un punto decimal.",
+        background: "linear-gradient(to right, #FF9800, #F44336)",
+        duration: 3000
+    }).showToast();
+  }
+
+  // Limitar el valor a 8 caracteres
+  if (value.length >= 8 && key !== "Backspace") {
+    event.preventDefault();
+    Toastify({
+        text: "El valor no puede tener más de 8 dígitos.",
+        background: "linear-gradient(to right, #FF9800, #F44336)",
+        duration: 3000
+    }).showToast();
+  }
+}
+// Función de validación para texto pegado
+function validatePastedInput(event) {
+    const input = event.target;
+    const paste = (event.clipboardData || window.clipboardData).getData('text');
+    const newValue = input.value + paste;
+    
+    // Permitir solo números y un punto decimal
+    const regex = /^[0-9]*\.?[0-9]*$/;
+    if (!regex.test(newValue)) {
+      event.preventDefault();
+      Toastify({
+        text: "Solo se permiten números positivos y un punto decimal.",
+        background: "linear-gradient(to right, #FF9800, #F44336)",
+        duration: 3000
+        }).showToast();
+      return;
+    }
+  
+    // Limitar el valor a 8 caracteres
+    if (newValue.length > 8) {
+      event.preventDefault();
+      Toastify({
+        text: "El valor no puede tener más de 8 dígitos.",
+        background: "linear-gradient(to right, #FF9800, #F44336)",
+        duration: 3000
+        }).showToast();
+    }
+  }
+
+// Obtener los inputs
+const inputs = document.querySelectorAll('input[type="number"]');
+
+// Agregar el evento de validación a cada input
+inputs.forEach(input => {
+  input.addEventListener('keypress', validateInput);
+  input.addEventListener('paste', validatePastedInput);
+  input.addEventListener('input', (event) => {
+    // Eliminar caracteres no permitidos si el usuario pega texto no válido
+    const value = event.target.value;
+    const regex = /^[0-9]*\.?[0-9]*$/;
+    if (!regex.test(value)) {
+      event.target.value = value.replace(/[^0-9.]/g, '');
+      Toastify({
+          text: "Solo se permiten números positivos y un punto decimal.",
+          background: "linear-gradient(to right, #FF9800, #F44336)",
+         duration: 3000
+      }).showToast();
+    }
+  });
+});
