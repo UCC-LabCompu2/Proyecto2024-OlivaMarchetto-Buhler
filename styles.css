@@ -171,6 +171,7 @@ canvas {
       flex-direction: column;
       align-items: stretch;
       gap: 0;
+      height: 1300px;
     }
     .column-1, .column-2 {
       width: 100%;
@@ -180,6 +181,10 @@ canvas {
       flex-direction: column;
       line-height: normal;
       margin-left: 0; /* Corregido */
+    }
+
+    .column-2{
+      height: 460px;
     }
     
     .calculation, .column-2 {
