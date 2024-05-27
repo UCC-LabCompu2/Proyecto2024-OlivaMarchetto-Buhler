@@ -86,6 +86,9 @@ function animate() {
     // Limpiar el canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   
+    // Dibujar la escala
+    drawScale();
+  
     // Dibujar la nave espacial
     const spaceshipWidth = 225; // Ancho de la nave espacial
     const spaceshipHeight = 225; // Altura de la nave espacial
@@ -104,6 +107,29 @@ function animate() {
     }
   }
   
+  // Función para dibujar la escala
+  function drawScale() {
+    const scaleHeight = 20; // Altura de la escala
+    const numLabels = 5; // Número de etiquetas en la escala
+    const startY = canvas.height * 0.99; // Posición inicial de la escala (con margen)
+    const endY = 0; // Posición final de la escala
+    const deltaY = (startY - endY) / (numLabels - 1); // Espacio entre etiquetas
+  
+    ctx.strokeStyle = "#000";
+    ctx.fillStyle = "#000";
+    ctx.font = "12px Arial";
+    
+    for (let i = 0; i < numLabels; i++) {
+      const distanceValue = parseFloat(document.getElementById('distance').value);
+      const label = (distanceValue / (numLabels - 1)) * i;
+      const yPos = startY - deltaY * i;
+      ctx.beginPath();
+      ctx.moveTo(canvas.width - scaleHeight, yPos);
+      ctx.lineTo(canvas.width, yPos);
+      ctx.stroke();
+      ctx.fillText(label.toFixed(2) + unitInit, canvas.width - scaleHeight - 60, yPos + 5); // Ajuste para dejar espacio entre el texto y el borde del canvas
+    }
+  }
   
 // Unidad de medida inicial
 let unitInit = 'km';
