@@ -6,7 +6,10 @@ const ctx = canvas.getContext('2d');
 const spaceship = new Image();
 spaceship.src = './images/paracaidas-canvas.png'; // Ruta de la imagen de la nave espacial
 
-// Ajustar el tamaño del canvas
+/**
+ * Ajustar el tamaño del canvas
+ * @method resizeCanvas
+ */
 const resizeCanvas = () => {
   canvas.width = canvas.clientWidth;
   canvas.height = canvas.clientHeight;
@@ -19,7 +22,10 @@ let velocity = 0;
 // Define la aceleración CONSTANTE
 const acceleration = 0.1;
 
-// Listener en el botón de calcular con la función para calcular el input restante
+/**
+ * Listener en el botón de calcular con la función para calcular el input restante
+ * @method calcResult
+ */
 document.querySelector('.calc-result').addEventListener('click', () => {
   let distance = parseFloat(document.getElementById('distance').value);
   let velocity = parseFloat(document.getElementById('velocity').value);
@@ -76,7 +82,10 @@ document.querySelector('.calc-result').addEventListener('click', () => {
   requestAnimationFrame(animate);
 });
 
-// Función para animar la nave espacial
+/**
+ * Función para animar la nave espacial
+ * @method animate
+ */
 const animate = () => {
   resizeCanvas();
 
@@ -107,7 +116,10 @@ const animate = () => {
   }
 };
 
-// Función para dibujar la escala
+/**
+ * Función para dibujar la escala
+ * @method drawScale
+ */
 const drawScale = () => {
   const scaleHeight = 20; // Altura de la escala
   const numLabels = 5; // Número de etiquetas en la escala
@@ -134,19 +146,27 @@ const drawScale = () => {
 // Unidad de medida inicial
 let unitInit = 'km';
 
-// Función para convertir unidades
+/**
+ * Función para convertir unidades
+ * @method convertUnits
+ * @param {number} value - El valor a convertir
+ * @param {string} currentUnit - La unidad actual del valor
+ * @param {string} targetUnit - La unidad a la que se desea convertir
+ * @param {string} conversionType - El tipo de conversión (distance, time, velocity)
+ * @return {number} El valor convertido
+ */
 const convertUnits = (value, currentUnit, targetUnit, conversionType) => {
   // Definir factores de conversión para distancia, tiempo y velocidad
   const conversionFactors = {
     'm': {
-      'distance':{ 'km': 0.001, 'm': 1 },
-      'time':{ 'km': 1/3600, 'm': 1/60 }, 
-      'velocity':{ 'km': 3.6, 'm': 1}
+      'distance': { 'km': 0.001, 'm': 1 },
+      'time': { 'km': 1/3600, 'm': 1/60 }, 
+      'velocity': { 'km': 3.6, 'm': 1}
     },
     'km': {
-      'distance':{ 'm': 1000, 'km': 1 }, 
-      'time':{ 'm': 3600, 'km': 1 }, 
-      'velocity':{ 'm': 1/3.6, 'km': 1}
+      'distance': { 'm': 1000, 'km': 1 }, 
+      'time': { 'm': 3600, 'km': 1 }, 
+      'velocity': { 'm': 1/3.6, 'km': 1}
     }
   };
 
@@ -157,7 +177,10 @@ const convertUnits = (value, currentUnit, targetUnit, conversionType) => {
   return convertedValue;
 };
 
-// Listener para el cambio de unidades en el select
+/**
+ * Listener para el cambio de unidades en el select
+ * @method unitConverterChange
+ */
 document.getElementById('unit-converter').addEventListener('change', () => {
   // Obtener los valores actuales de los inputs
   const distanceValue = parseFloat(document.getElementById('distance').value);
@@ -192,7 +215,11 @@ document.getElementById('unit-converter').addEventListener('change', () => {
   document.getElementById('velocity').value = convertedVelocity.toFixed(2);
 });
 
-// Función de validación
+/**
+ * Función de validación
+ * @method validateInput
+ * @param {Event} event - El evento de teclado
+ */
 const validateInput = (event) => {
   const input = event.target;
   const value = input.value;
@@ -211,19 +238,20 @@ const validateInput = (event) => {
     }).showToast();
     return;
   }
-  
-  // Si el valor contiene caracteres no numéricos o negativos
-  if (!regex.test(value) || key === "-" || (key === "." && value.includes("."))) {
+
+  // Permitir solo un punto decimal en el valor
+  if (key === '.' && value.includes('.')) {
     event.preventDefault();
     Toastify({
-      text: "Solo se permiten números positivos y un punto decimal.",
+      text: "Solo se permite un punto decimal.",
       background: "linear-gradient(to right, #FF9800, #F44336)",
       duration: 3000
     }).showToast();
+    return;
   }
 
   // Limitar el valor a 8 caracteres
-  if (value.length >= 8 && key !== "Backspace") {
+  if (value.length >= 8) {
     event.preventDefault();
     Toastify({
       text: "El valor no puede tener más de 8 dígitos.",
@@ -233,7 +261,11 @@ const validateInput = (event) => {
   }
 };
 
-// Función de validación para texto pegado
+/**
+ * Función de validación para texto pegado
+ * @method validatePastedInput
+ * @param {Event} event - El evento de pegado
+ */
 const validatePastedInput = (event) => {
   const input = event.target;
   const paste = (event.clipboardData || window.clipboardData).getData('text');
