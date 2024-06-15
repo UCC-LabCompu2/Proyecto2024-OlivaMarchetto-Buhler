@@ -7,10 +7,10 @@ const spaceship = new Image();
 spaceship.src = './images/paracaidas-canvas.png'; // Ruta de la imagen de la nave espacial
 
 // Ajustar el tamaño del canvas
-function resizeCanvas() {
+const resizeCanvas = () => {
   canvas.width = canvas.clientWidth;
   canvas.height = canvas.clientHeight;
-}
+};
 
 // Inicializa la posición y velocidad de la nave espacial
 let positionY = 0;
@@ -19,8 +19,8 @@ let velocity = 0;
 // Define la aceleración CONSTANTE
 const acceleration = 0.1;
 
-// Listenre en el botón de calcular con la funcion para calcular el input restante
-document.querySelector('.calc-result').addEventListener('click', function() {
+// Listener en el botón de calcular con la función para calcular el input restante
+document.querySelector('.calc-result').addEventListener('click', () => {
   let distance = parseFloat(document.getElementById('distance').value);
   let velocity = parseFloat(document.getElementById('velocity').value);
   let time = parseFloat(document.getElementById('time').value);
@@ -77,7 +77,7 @@ document.querySelector('.calc-result').addEventListener('click', function() {
 });
 
 // Función para animar la nave espacial
-function animate() {
+const animate = () => {
   resizeCanvas();
 
   velocity += acceleration;
@@ -105,10 +105,10 @@ function animate() {
     velocity = 0;
     requestAnimationFrame(animate);
   }
-}
+};
 
 // Función para dibujar la escala
-function drawScale() {
+const drawScale = () => {
   const scaleHeight = 20; // Altura de la escala
   const numLabels = 5; // Número de etiquetas en la escala
   const startY = canvas.height * 0.99; // Posición inicial de la escala (con margen)
@@ -129,13 +129,13 @@ function drawScale() {
     ctx.stroke();
     ctx.fillText(label.toFixed(2) + unitInit, canvas.width - scaleHeight - 60, yPos + 5); // Ajuste para dejar espacio entre el texto y el borde del canvas
   }
-}
+};
   
 // Unidad de medida inicial
 let unitInit = 'km';
 
 // Función para convertir unidades
-function convertUnits(value, currentUnit, targetUnit, conversionType) {
+const convertUnits = (value, currentUnit, targetUnit, conversionType) => {
   // Definir factores de conversión para distancia, tiempo y velocidad
   const conversionFactors = {
     'm': {
@@ -155,10 +155,10 @@ function convertUnits(value, currentUnit, targetUnit, conversionType) {
   const convertedValue = value * conversionFactor;
 
   return convertedValue;
-}
+};
 
 // Listener para el cambio de unidades en el select
-document.getElementById('unit-converter').addEventListener('change', function() {
+document.getElementById('unit-converter').addEventListener('change', () => {
   // Obtener los valores actuales de los inputs
   const distanceValue = parseFloat(document.getElementById('distance').value);
   const timeValue = parseFloat(document.getElementById('time').value);
@@ -193,7 +193,7 @@ document.getElementById('unit-converter').addEventListener('change', function() 
 });
 
 // Función de validación
-function validateInput(event) {
+const validateInput = (event) => {
   const input = event.target;
   const value = input.value;
   const key = event.key;
@@ -231,10 +231,10 @@ function validateInput(event) {
       duration: 3000
     }).showToast();
   }
-}
+};
 
 // Función de validación para texto pegado
-function validatePastedInput(event) {
+const validatePastedInput = (event) => {
   const input = event.target;
   const paste = (event.clipboardData || window.clipboardData).getData('text');
   const newValue = input.value + paste;
@@ -247,7 +247,7 @@ function validatePastedInput(event) {
       text: "Solo se permiten números positivos y un punto decimal.",
       background: "linear-gradient(to right, #FF9800, #F44336)",
       duration: 3000
-      }).showToast();
+    }).showToast();
     return;
   }
 
@@ -258,9 +258,9 @@ function validatePastedInput(event) {
       text: "El valor no puede tener más de 8 dígitos.",
       background: "linear-gradient(to right, #FF9800, #F44336)",
       duration: 3000
-      }).showToast();
+    }).showToast();
   }
-}
+};
 
 // Obtener los inputs
 const inputs = document.querySelectorAll('input[type="number"]');
