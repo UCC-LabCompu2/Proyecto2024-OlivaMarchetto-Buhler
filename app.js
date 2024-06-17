@@ -89,7 +89,17 @@ document.querySelector('.calc-result').addEventListener('click', () => {
 const animate = () => {
   resizeCanvas();
 
-  velocity += acceleration;
+  // Calcular el tiempo de caída
+  const time = parseFloat(document.getElementById('time').value);
+
+  // Calcular la velocidad inicial
+  const initialVelocity = parseFloat(document.getElementById('velocity').value);
+
+  // Ajustar la velocidad inicial a la velocidad calculada
+  if (!isNaN(initialVelocity)) {
+    velocity = initialVelocity;
+  }
+
   positionY += velocity;
 
   // Limpiar el canvas
@@ -105,6 +115,10 @@ const animate = () => {
 
   ctx.drawImage(spaceship, xPos, positionY, spaceshipWidth, spaceshipHeight);
 
+  // Dibujar la flecha indicadora de velocidad
+  const arrowSize = 20; // Tamaño de la flecha
+  drawVelocityArrow(canvas.width / 2, positionY + spaceshipHeight, arrowSize);
+
   // Repetir la animación si la nave aún está dentro del canvas
   if (positionY < canvas.height) {
     requestAnimationFrame(animate);
@@ -114,6 +128,29 @@ const animate = () => {
     velocity = 0;
     requestAnimationFrame(animate);
   }
+};
+
+/**
+ * Función para dibujar la flecha indicadora de velocidad
+ * @method drawVelocityArrow
+ * @param {number} x - Coordenada x de la flecha
+ * @param {number} y - Coordenada y de la flecha
+ * @param {number} size - Tamaño de la flecha
+ */
+const drawVelocityArrow = (x, y, size) => {
+  ctx.beginPath();
+  ctx.moveTo(x, y);
+  ctx.lineTo(x - size / 2, y - size);
+  ctx.lineTo(x + size / 2, y - size);
+  ctx.closePath();
+  ctx.fillStyle = "#FF5722"; // Color rojo para la flecha indicadora
+  ctx.fill();
+
+  // Mostrar el valor de la velocidad
+  ctx.font = "12px Arial";
+  ctx.fillStyle = "#000";
+  ctx.textAlign = "center";
+  ctx.fillText(`Velocidad: ${velocity.toFixed(2)} ${unitInit}/${unitInit == "km" ? "h" : "s"}`, x, y - size - 5);
 };
 
 /**
