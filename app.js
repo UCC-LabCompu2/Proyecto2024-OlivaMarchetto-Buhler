@@ -26,7 +26,7 @@ const acceleration = 0.1;
  * Listener en el botón de calcular con la función para calcular el input restante
  * @method calcResult
  */
-document.querySelector('.calc-result').addEventListener('click', () => {
+const calcResult = () => {
   let distance = parseFloat(document.getElementById('distance').value);
   let velocity = parseFloat(document.getElementById('velocity').value);
   let time = parseFloat(document.getElementById('time').value);
@@ -80,7 +80,7 @@ document.querySelector('.calc-result').addEventListener('click', () => {
 
   // Iniciar la animación
   requestAnimationFrame(animate);
-});
+};
 
 /**
  * Función para animar la nave espacial
@@ -218,7 +218,7 @@ const convertUnits = (value, currentUnit, targetUnit, conversionType) => {
  * Listener para el cambio de unidades en el select
  * @method unitConverterChange
  */
-document.getElementById('unit-converter').addEventListener('change', () => {
+const unitConverterChange = () => {
   // Obtener los valores actuales de los inputs
   const distanceValue = parseFloat(document.getElementById('distance').value);
   const timeValue = parseFloat(document.getElementById('time').value);
@@ -228,7 +228,7 @@ document.getElementById('unit-converter').addEventListener('change', () => {
   const convertUnit = document.getElementById('unit-converter').value;
 
   // Validar que los valores sean válidos
-  if (isNaN(distanceValue) || isNaN(timeValue) || isNaN(velocityValue) || distanceValue === 0 || timeValue === 0 || velocityValue === 0) {    
+  if (isNaN(distanceValue) || isNaN(timeValue) || isNaN(velocityValue) || distanceValue === 0 || timeValue === 0 || velocityValue === 0) {
     unitInit = convertUnit;
     Toastify({
       text: "Por favor, ingrese valores válidos para la conversión.",
@@ -250,7 +250,7 @@ document.getElementById('unit-converter').addEventListener('change', () => {
   document.getElementById('distance').value = convertedDistance.toFixed(2);
   document.getElementById('time').value = convertedTime.toFixed(2);
   document.getElementById('velocity').value = convertedVelocity.toFixed(2);
-});
+};
 
 /**
  * Función de validación
@@ -331,27 +331,16 @@ const validatePastedInput = (event) => {
   }
 };
 
-// Obtener los inputs
-const inputs = document.querySelectorAll('input[type="number"]');
-
-// Agregar el evento de validación a cada input
-inputs.forEach(input => {
-  input.addEventListener('keypress', validateInput);
-
-  input.addEventListener('paste', validatePastedInput);
-
-  input.addEventListener('input', (event) => {
-    // Eliminar caracteres no permitidos si el usuario pega texto no válido
-    const value = event.target.value;
-    const regex = /^[0-9]*\.?[0-9]*$/;
-    if (!regex.test(value)) {
-      event.target.value = value.replace(/[^0-9.]/g, '');
-      Toastify({
-        text: "Solo se permiten números positivos y un punto decimal.",
-        background: "linear-gradient(to right, #FF9800, #F44336)",
-        duration: 3000
-      }).showToast();
-    }
-  });
-
-});
+// Función para manejar eventos de input
+const handleInput = (event) => {
+  const value = event.target.value;
+  const regex = /^[0-9]*\.?[0-9]*$/;
+  if (!regex.test(value)) {
+    event.target.value = value.replace(/[^0-9.]/g, '');
+    Toastify({
+      text: "Solo se permiten números positivos y un punto decimal.",
+      background: "linear-gradient(to right, #FF9800, #F44336)",
+      duration: 3000
+    }).showToast();
+  }
+};

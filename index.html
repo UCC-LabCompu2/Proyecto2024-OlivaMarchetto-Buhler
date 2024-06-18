@@ -37,20 +37,20 @@
           <div class="calc-description">Rellene exactamente 2 campos:</div>
           <div class="calc-field">
             <label for="distance">Distancia:</label>
-            <input size="50" type="number" placeholder="Distancia" id="distance">
+            <input type="number" id="distance" onkeypress="validateInput(event)" onpaste="validatePastedInput(event)" oninput="handleInput(event)">
           </div>
           <div class="calc-field">
             <label for="velocity">Velocidad:</label>
-            <input size="50" type="number" placeholder="Velocidad" id="velocity">
+            <input type="number" id="velocity" onkeypress="validateInput(event)" onpaste="validatePastedInput(event)" oninput="handleInput(event)">
           </div>
           <div class="calc-field">
             <label for="time">Tiempo:</label>
-            <input size="50" type="number" placeholder="Tiempo" id="time">
+            <input type="number" id="time" onkeypress="validateInput(event)" onpaste="validatePastedInput(event)" oninput="handleInput(event)">
           </div>
           <div class="results">
-            <button class="calc-result">Calcular</button>
+            <button class="calc-result" onclick="calcResult()">Calcular</button>
             <label for="unit-converter"></label>
-            <select id="unit-converter">
+            <select id="unit-converter" onchange="unitConverterChange()">
               <option value="km" class="option-value">Kilómetros por hora</option>
               <option value="m" class="option-value">Metros por segundo</option>
             </select>
