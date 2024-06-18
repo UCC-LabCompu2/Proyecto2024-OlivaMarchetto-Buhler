@@ -331,7 +331,11 @@ const validatePastedInput = (event) => {
   }
 };
 
-// Función para manejar eventos de input
+/**
+ * Función para manejar eventos de input.
+ * @function handleInput
+ * @param {Event} event - El evento de input.
+ */
 const handleInput = (event) => {
   const value = event.target.value;
   const regex = /^[0-9]*\.?[0-9]*$/;
