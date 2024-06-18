@@ -18,7 +18,7 @@ Este proyecto es parte del trabajo final para la materia de Laboratorio de Compu
 
 ### Enlaces
 - **GitHub Pages:** [Caída Libre](https://ucc-labcompu2.github.io/Proyecto2024-OlivaMarchetto-Buhler/)
-- **Repositorio en GitHub:** [Proyecto2024-OlivaMarchetto-Buhler](https://github.com/facu-olivam/Proyecto2024-OlivaMarchetto-Buhler)
+- **Repositorio en GitHub:** [Proyecto2024-OlivaMarchetto-Buhler](https://github.com/UCC-LabCompu2/Proyecto2024-OlivaMarchetto-Buhler/)
 
 ### Contenido de la Página
 La página consta de las siguientes secciones:
