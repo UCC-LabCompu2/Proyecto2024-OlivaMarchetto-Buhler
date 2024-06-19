@@ -84,6 +84,7 @@ const calcResult = () => {
 };
 let animationFrameId = null; // Variable para almacenar el ID del frame de animación
 
+
 /**
  * Función para animar la nave espacial
  * @method animate
@@ -122,11 +123,12 @@ const animate = () => {
   drawVelocityArrow(canvas.width / 2, positionY + spaceshipHeight, arrowSize);
 
   // Verificar si la nave aún está dentro del canvas
-  if (positionY < canvas.height) {
+  if (positionY < canvas.height - spaceshipHeight) {
     // Continuar animando si no ha llegado al suelo
     animationFrameId = requestAnimationFrame(animate);
   } else {
-    // Si llega al suelo, detener la animación
+    // Detener la animación al llegar al suelo
+    cancelAnimationFrame(animationFrameId);
     animationFrameId = null;
     document.getElementById('animate-button').style.display = 'block';
   }
