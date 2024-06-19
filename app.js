@@ -18,6 +18,7 @@ const resizeCanvas = () => {
 // Inicializa la posición y velocidad de la nave espacial
 let positionY = 0;
 let velocity = 0;
+let initialVelocity = 0;
 
 // Define la aceleración CONSTANTE
 const acceleration = 0.1;
@@ -71,9 +72,9 @@ const calcResult = () => {
   }
 
   // Calcular la velocidad inicial
-  let initialVelocity = distance / time;
+  c = distance / time;
 
-  let positionY = 0;
+  positionY = 0;
 
   // Limpiar el canvas
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -81,6 +82,7 @@ const calcResult = () => {
   // Iniciar la animación
   requestAnimationFrame(animate);
 };
+let animationFrameId = null; // Variable para almacenar el ID del frame de animación
 
 /**
  * Función para animar la nave espacial
@@ -119,15 +121,27 @@ const animate = () => {
   const arrowSize = 20; // Tamaño de la flecha
   drawVelocityArrow(canvas.width / 2, positionY + spaceshipHeight, arrowSize);
 
-  // Repetir la animación si la nave aún está dentro del canvas
+  // Verificar si la nave aún está dentro del canvas
   if (positionY < canvas.height) {
-    requestAnimationFrame(animate);
+    // Continuar animando si no ha llegado al suelo
+    animationFrameId = requestAnimationFrame(animate);
   } else {
-    // Reiniciar la posición para bucle
-    positionY = 0;
-    velocity = 0;
-    requestAnimationFrame(animate);
+    // Si llega al suelo, detener la animación
+    animationFrameId = null;
+    document.getElementById('animate-button').style.display = 'block';
   }
+};
+
+/**
+ * Función para iniciar la animación de la nave espacial.
+ * @function startAnimation
+ */
+const startAnimation = () => {
+  document.getElementById('animate-button').style.display = 'none';
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  positionY = 0;
+  velocity = 0;
+  animate();
 };
 
 /**
