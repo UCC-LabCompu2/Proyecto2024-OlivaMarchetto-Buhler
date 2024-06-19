@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .container {
@@ -46,7 +46,8 @@ header {
   text-align: justify;
 }
 
-.calculation, .column-2 {
+.calculation,
+.column-2 {
   background-color: #f9f9f9;
   border-radius: 8px;
   padding: 20px;
@@ -112,7 +113,8 @@ canvas {
   border: 1px solid #ccc;
 }
 
-.column-1, .column-2 {
+.column-1,
+.column-2 {
   flex: 1;
 }
 
@@ -127,7 +129,7 @@ canvas {
   width: 25%;
   font-weight: bold;
   font-size: 1.2em;
-  color:  #007bff;
+  color: #007bff;
   border-color: #007bff;
   font-size: 16px;
   cursor: pointer;
@@ -142,7 +144,7 @@ canvas {
 
 .results #unit-converter {
   width: 70%;
-  color:  #007bff;
+  color: #007bff;
   border-color: #007bff;
   font-size: 16px;
   cursor: pointer;
@@ -153,17 +155,17 @@ canvas {
 
 .option-value {
   background-color: #fff;
-  color:  #007bff;
+  color: #007bff;
   border-color: #007bff;
 }
 
-.calc-result:hover, #unit-converter:hover {
+.calc-result:hover,
+#unit-converter:hover {
   background-color: #007bff;
   color: #fff;
 }
-  
-@media (max-width: 991px) {
 
+@media (max-width: 991px) {
   .container {
     max-width: 100%;
     padding: 0;
@@ -176,7 +178,8 @@ canvas {
     height: 1300px;
   }
 
-  .column-1, .column-2 {
+  .column-1,
+  .column-2 {
     width: 100%;
     flex: 1;
     max-width: 100%;
@@ -190,8 +193,8 @@ canvas {
     height: 460px;
   }
 
-  .calculation, .column-2 {
+  .calculation,
+  .column-2 {
     padding: 0px 0px 20px 0px;
   }
-
 }

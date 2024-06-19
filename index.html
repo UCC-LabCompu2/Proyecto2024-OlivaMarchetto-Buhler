@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Oliva Marchetto Facundo y Buhler Augusto">
-  <meta name="description" content="Proyecto final de Laboratorio de Computacion II de la UCC. Fisica Facil, Caida libre.">
+  <meta name="description"
+    content="Proyecto final de Laboratorio de Computacion II de la UCC. Fisica Facil, Caida libre.">
   <meta name="keywords" content="Caída Libre, física, cálculo, distancia, velocidad, tiempo ">
 
   <title>Laboratorio II - Caída Libre</title>
@@ -16,10 +18,12 @@
   <link href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" rel="stylesheet">
 
 </head>
+
 <body>
   <div class="container">
 
-    <img loading="lazy" src="./images/Hombre-en-paracaidas.png" class="nav-img" alt="Ilustración de hombre en paracaídas cayendo en el vacío."/>
+    <img loading="lazy" src="./images/Hombre-en-paracaidas.png" class="nav-img"
+      alt="Ilustración de hombre en paracaídas cayendo en el vacío." />
 
     <header>
       <h1 class="title">Caída Libre</h1>
@@ -29,7 +33,11 @@
       <section class="column-1">
         <article class="paragraph">
           <p>
-            En física, se denomina caída libre al movimiento de un cuerpo bajo la acción exclusiva de un campo gravitatorio. Esta definición formal excluye a todas las caídas reales influenciadas en mayor o menor medida por la resistencia aerodinámica del aire, así como a cualquier otra que tenga lugar en el seno de un fluido; sin embargo, es frecuente también referirse coloquialmente a estas como caídas libres, aunque los efectos de la densidad del medio no sean por lo general despreciables.
+            En física, se denomina caída libre al movimiento de un cuerpo bajo la acción exclusiva de un campo
+            gravitatorio. Esta definición formal excluye a todas las caídas reales influenciadas en mayor o menor medida
+            por la resistencia aerodinámica del aire, así como a cualquier otra que tenga lugar en el seno de un fluido;
+            sin embargo, es frecuente también referirse coloquialmente a estas como caídas libres, aunque los efectos de
+            la densidad del medio no sean por lo general despreciables.
           </p>
         </article>
         <article class="calculation">
@@ -37,15 +45,18 @@
           <div class="calc-description">Rellene exactamente 2 campos:</div>
           <div class="calc-field">
             <label for="distance">Distancia:</label>
-            <input type="number" id="distance" onkeypress="validateInput(event)" onpaste="validatePastedInput(event)" oninput="handleInput(event)">
+            <input type="number" id="distance" onkeypress="validateInput(event)" onpaste="validatePastedInput(event)"
+              oninput="handleInput(event)">
           </div>
           <div class="calc-field">
             <label for="velocity">Velocidad:</label>
-            <input type="number" id="velocity" onkeypress="validateInput(event)" onpaste="validatePastedInput(event)" oninput="handleInput(event)">
+            <input type="number" id="velocity" onkeypress="validateInput(event)" onpaste="validatePastedInput(event)"
+              oninput="handleInput(event)">
           </div>
           <div class="calc-field">
             <label for="time">Tiempo:</label>
-            <input type="number" id="time" onkeypress="validateInput(event)" onpaste="validatePastedInput(event)" oninput="handleInput(event)">
+            <input type="number" id="time" onkeypress="validateInput(event)" onpaste="validatePastedInput(event)"
+              oninput="handleInput(event)">
           </div>
           <div class="results">
             <button class="calc-result" onclick="calcResult()">Calcular</button>
@@ -58,7 +69,7 @@
 
         </article>
       </section>
-  
+
       <aside class="column-2">
         <div class="canvas-title">Canvas con caída libre</div>
         <canvas id="myCanvas"></canvas>
@@ -72,4 +83,5 @@
   <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 </body>
+
 </html>
