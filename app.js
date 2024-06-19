@@ -84,7 +84,6 @@ const calcResult = () => {
 };
 let animationFrameId = null; // Variable para almacenar el ID del frame de animación
 
-
 /**
  * Función para animar la nave espacial
  * @method animate
@@ -130,7 +129,7 @@ const animate = () => {
     // Detener la animación al llegar al suelo
     cancelAnimationFrame(animationFrameId);
     animationFrameId = null;
-    document.getElementById('animate-button').style.display = 'block';
+    document.getElementById("animate-button").style.display = "block";
   }
 };
 
@@ -139,7 +138,7 @@ const animate = () => {
  * @function startAnimation
  */
 const startAnimation = () => {
-  document.getElementById('animate-button').style.display = 'none';
+  document.getElementById("animate-button").style.display = "none";
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   positionY = 0;
   velocity = 0;
@@ -167,7 +166,8 @@ const drawVelocityArrow = (x, y, size) => {
   ctx.fillStyle = "#000";
   ctx.textAlign = "center";
   ctx.fillText(
-    `Velocidad: ${velocity.toFixed(2)} ${unitInit}/${unitInit == "km" ? "h" : "s"
+    `Velocidad: ${velocity.toFixed(2)} ${unitInit}/${
+      unitInit == "km" ? "h" : "s"
     }`,
     x,
     y - size - 5
