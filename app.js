@@ -78,7 +78,7 @@ const calcResult = () => {
  */
 const animate = () => {
   const canvas = document.getElementById("myCanvas");
-  const ctx = canvas.getContext("2d");  
+  const ctx = canvas.getContext("2d");
   const spaceship = new Image();
   spaceship.src = "./images/paracaidas-canvas.png"; // Ruta de la imagen de la nave espacial
 
@@ -161,11 +161,11 @@ const drawVelocityArrow = (x, y, size) => {
   ctx.fillStyle = "#000";
   ctx.textAlign = "center";
   ctx.fillText(
-    `Velocidad: ${velocity.toFixed(2)} ${unitInit}/${
-      unitInit == "km" ? "h" : "s"
-    }`,
-    x,
-    y - size - 5
+      `Velocidad: ${velocity.toFixed(2)} ${unitInit}/${
+          unitInit == "km" ? "h" : "s"
+      }`,
+      x,
+      y - size - 5
   );
 };
 
@@ -196,9 +196,9 @@ const drawScale = () => {
     ctx.lineTo(canvas.width, yPos);
     ctx.stroke();
     ctx.fillText(
-      label.toFixed(2) + unitInit,
-      canvas.width - scaleHeight - 60,
-      yPos + 5
+        label.toFixed(2) + unitInit,
+        canvas.width - scaleHeight - 60,
+        yPos + 5
     ); // Ajuste para dejar espacio entre el texto y el borde del canvas
   }
 };
@@ -232,7 +232,7 @@ const convertUnits = (value, currentUnit, targetUnit, conversionType) => {
 
   // Realizar la conversión
   const conversionFactor =
-    conversionFactors[currentUnit][conversionType][targetUnit];
+      conversionFactors[currentUnit][conversionType][targetUnit];
   const convertedValue = value * conversionFactor;
 
   return convertedValue;
@@ -253,12 +253,12 @@ const unitConverterChange = () => {
 
   // Validar que los valores sean válidos
   if (
-    isNaN(distanceValue) ||
-    isNaN(timeValue) ||
-    isNaN(velocityValue) ||
-    distanceValue === 0 ||
-    timeValue === 0 ||
-    velocityValue === 0
+      isNaN(distanceValue) ||
+      isNaN(timeValue) ||
+      isNaN(velocityValue) ||
+      distanceValue === 0 ||
+      timeValue === 0 ||
+      velocityValue === 0
   ) {
     unitInit = convertUnit;
     Toastify({
@@ -271,17 +271,17 @@ const unitConverterChange = () => {
 
   // Convertir los valores a la nueva unidad
   const convertedDistance = convertUnits(
-    distanceValue,
-    unitInit,
-    convertUnit,
-    "distance"
+      distanceValue,
+      unitInit,
+      convertUnit,
+      "distance"
   );
   const convertedTime = convertUnits(timeValue, unitInit, convertUnit, "time");
   const convertedVelocity = convertUnits(
-    velocityValue,
-    unitInit,
-    convertUnit,
-    "velocity"
+      velocityValue,
+      unitInit,
+      convertUnit,
+      "velocity"
   );
 
   // Actualizar el valor de unitInit para guardar su estado cuando el select cambie nuevamente
