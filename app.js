@@ -1,33 +1,25 @@
-// Selecciona el canvas y su propiedad context
-const canvas = document.getElementById("myCanvas");
-const ctx = canvas.getContext("2d");
-
-// Definir la imagen de la nave espacial
-const spaceship = new Image();
-spaceship.src = "./images/paracaidas-canvas.png"; // Ruta de la imagen de la nave espacial
-
 /**
  * Ajustar el tamaño del canvas
  * @method resizeCanvas
  */
 const resizeCanvas = () => {
+  const canvas = document.getElementById("myCanvas");
+
   canvas.width = canvas.clientWidth;
   canvas.height = canvas.clientHeight;
 };
 
 // Inicializa la posición y velocidad de la nave espacial
 let positionY = 0;
-let velocity = 0;
-let initialVelocity = 0;
-
-// Define la aceleración CONSTANTE
-const acceleration = 0.1;
 
 /**
  * Listener en el botón de calcular con la función para calcular el input restante
  * @method calcResult
  */
 const calcResult = () => {
+  const canvas = document.getElementById("myCanvas");
+  const ctx = canvas.getContext("2d");
+
   let distance = parseFloat(document.getElementById("distance").value);
   let velocity = parseFloat(document.getElementById("velocity").value);
   let time = parseFloat(document.getElementById("time").value);
@@ -71,9 +63,6 @@ const calcResult = () => {
     time = missingField;
   }
 
-  // Calcular la velocidad inicial
-  c = distance / time;
-
   positionY = 0;
 
   // Limpiar el canvas
@@ -82,17 +71,18 @@ const calcResult = () => {
   // Iniciar la animación
   requestAnimationFrame(animate);
 };
-let animationFrameId = null; // Variable para almacenar el ID del frame de animación
 
 /**
  * Función para animar la nave espacial
  * @method animate
  */
 const animate = () => {
-  resizeCanvas();
+  const canvas = document.getElementById("myCanvas");
+  const ctx = canvas.getContext("2d");  
+  const spaceship = new Image();
+  spaceship.src = "./images/paracaidas-canvas.png"; // Ruta de la imagen de la nave espacial
 
-  // Calcular el tiempo de caída
-  const time = parseFloat(document.getElementById("time").value);
+  resizeCanvas();
 
   // Calcular la velocidad inicial
   const initialVelocity = parseFloat(document.getElementById("velocity").value);
@@ -124,11 +114,10 @@ const animate = () => {
   // Verificar si la nave aún está dentro del canvas
   if (positionY < canvas.height - spaceshipHeight) {
     // Continuar animando si no ha llegado al suelo
-    animationFrameId = requestAnimationFrame(animate);
+    requestAnimationFrame(animate);
   } else {
     // Detener la animación al llegar al suelo
-    cancelAnimationFrame(animationFrameId);
-    animationFrameId = null;
+    cancelAnimationFrame(null);
     document.getElementById("animate-button").style.display = "block";
   }
 };
@@ -138,6 +127,9 @@ const animate = () => {
  * @function startAnimation
  */
 const startAnimation = () => {
+  const canvas = document.getElementById("myCanvas");
+  const ctx = canvas.getContext("2d");
+
   document.getElementById("animate-button").style.display = "none";
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   positionY = 0;
@@ -153,6 +145,9 @@ const startAnimation = () => {
  * @param {number} size - Tamaño de la flecha
  */
 const drawVelocityArrow = (x, y, size) => {
+  const canvas = document.getElementById("myCanvas");
+  const ctx = canvas.getContext("2d");
+
   ctx.beginPath();
   ctx.moveTo(x, y);
   ctx.lineTo(x - size / 2, y - size);
@@ -179,6 +174,9 @@ const drawVelocityArrow = (x, y, size) => {
  * @method drawScale
  */
 const drawScale = () => {
+  const canvas = document.getElementById("myCanvas");
+  const ctx = canvas.getContext("2d");
+
   const scaleHeight = 20; // Altura de la escala
   const numLabels = 5; // Número de etiquetas en la escala
   const startY = canvas.height * 0.99; // Posición inicial de la escala (con margen)
@@ -304,9 +302,6 @@ const validateInput = (event) => {
   const input = event.target;
   const value = input.value;
   const key = event.key;
-
-  // Permitir solo números, el punto decimal, y eliminar caracteres con backspace
-  const regex = /^[0-9]*\.?[0-9]*$/;
 
   // Verificar si la tecla presionada es una letra o símbolo (excepto punto decimal y backspace)
   if (!/[0-9.]/.test(key) && key !== "Backspace") {
