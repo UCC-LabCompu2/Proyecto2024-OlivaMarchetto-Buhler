@@ -13,6 +13,19 @@ const resizeCanvas = () => {
 let positionY = 0;
 
 /**
+ * Mostrar un mensaje de toast
+ * @method showToast
+ * @param {string} text - El texto a mostrar
+ */
+const showToast = (text) => {
+  Toastify({
+    text: text,
+    background: "linear-gradient(to right, #FF9800, #F44336)",
+    duration: 3000,
+  }).showToast();
+};
+
+/**
  * Listener en el botón de calcular con la función para calcular el input restante
  * @method calcResult
  */
@@ -30,21 +43,13 @@ const calcResult = () => {
   const greaterThanZeroFields = fields.filter((field) => field > 0);
 
   if (completedFields.length !== 2) {
-    Toastify({
-      text: "Debe completar exactamente 2 de los 3 campos.",
-      background: "linear-gradient(to right, #FF9800, #F44336)",
-      duration: 3000,
-    }).showToast();
-    return;
+    showToast("Debe completar exactamente 2 de los 3 campos.");
+    return false;
   }
 
   if (greaterThanZeroFields.length !== 2) {
-    Toastify({
-      text: "Los valores deben ser mayores a 0.",
-      background: "linear-gradient(to right, #FF9800, #F44336)",
-      duration: 3000,
-    }).showToast();
-    return;
+    showToast("Los valores deben ser mayores a cero.");
+    return false;
   }
 
   // Calcular el campo faltante
@@ -261,12 +266,9 @@ const unitConverterChange = () => {
       velocityValue === 0
   ) {
     unitInit = convertUnit;
-    Toastify({
-      text: "Por favor, ingrese valores válidos para la conversión.",
-      background: "linear-gradient(to right, #FF9800, #F44336)",
-      duration: 3000,
-    }).showToast();
-    return;
+
+    showToast("Por favor, ingrese valores válidos para la conversión.");
+    return false;
   }
 
   // Convertir los valores a la nueva unidad
@@ -306,33 +308,22 @@ const validateInput = (event) => {
   // Verificar si la tecla presionada es una letra o símbolo (excepto punto decimal y backspace)
   if (!/[0-9.]/.test(key) && key !== "Backspace") {
     event.preventDefault();
-    Toastify({
-      text: "Solo se permiten números y un punto decimal.",
-      background: "linear-gradient(to right, #FF9800, #F44336)",
-      duration: 3000,
-    }).showToast();
-    return;
+    showToast("Solo se permiten números y un punto decimal.");
+    return false;
   }
 
   // Permitir solo un punto decimal en el valor
   if (key === "." && value.includes(".")) {
     event.preventDefault();
-    Toastify({
-      text: "Solo se permite un punto decimal.",
-      background: "linear-gradient(to right, #FF9800, #F44336)",
-      duration: 3000,
-    }).showToast();
-    return;
+    showToast("Solo se permite un punto decimal.");
+    return false;
   }
 
   // Limitar el valor a 8 caracteres
   if (value.length >= 8) {
     event.preventDefault();
-    Toastify({
-      text: "El valor no puede tener más de 8 dígitos.",
-      background: "linear-gradient(to right, #FF9800, #F44336)",
-      duration: 3000,
-    }).showToast();
+    showToast("El valor no puede tener más de 8 dígitos.");
+    return false;
   }
 };
 
@@ -350,22 +341,15 @@ const validatePastedInput = (event) => {
   const regex = /^[0-9]*\.?[0-9]*$/;
   if (!regex.test(newValue)) {
     event.preventDefault();
-    Toastify({
-      text: "Solo se permiten números positivos y un punto decimal.",
-      background: "linear-gradient(to right, #FF9800, #F44336)",
-      duration: 3000,
-    }).showToast();
-    return;
+    showToast("Solo se permiten números positivos y un punto decimal.");
+    return false;
   }
 
   // Limitar el valor a 8 caracteres
   if (newValue.length > 8) {
     event.preventDefault();
-    Toastify({
-      text: "El valor no puede tener más de 8 dígitos.",
-      background: "linear-gradient(to right, #FF9800, #F44336)",
-      duration: 3000,
-    }).showToast();
+    showToast("El valor no puede tener más de 8 dígitos.");
+    return false;
   }
 };
 
@@ -379,10 +363,7 @@ const handleInput = (event) => {
   const regex = /^[0-9]*\.?[0-9]*$/;
   if (!regex.test(value)) {
     event.target.value = value.replace(/[^0-9.]/g, "");
-    Toastify({
-      text: "Solo se permiten números positivos y un punto decimal.",
-      background: "linear-gradient(to right, #FF9800, #F44336)",
-      duration: 3000,
-    }).showToast();
+    showToast("Solo se permiten números positivos y un punto decimal.");
+    return false;
   }
 };
