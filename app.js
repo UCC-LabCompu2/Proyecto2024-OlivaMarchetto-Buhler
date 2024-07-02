@@ -298,12 +298,13 @@ const unitConverterChange = () => {
 /**
  * Función de validación
  * @method validateInput
- * @param {Event} event - El evento de teclado
+ * @param {Event} event - El evento de keypress o de paste
  */
 const validateInput = (event) => {
   const input = event.target;
-  const value = input.value;
-  const key = event.key;
+  const key = event.key || (event.clipboardData || window.clipboardData).getData("text");
+  const newValue = input.value + key;
+  value = input.value;
 
   // Verificar si la tecla presionada es una letra o símbolo (excepto punto decimal y backspace)
   if (!/[0-9.]/.test(key) && key !== "Backspace") {
@@ -316,32 +317,6 @@ const validateInput = (event) => {
   if (key === "." && value.includes(".")) {
     event.preventDefault();
     showToast("Solo se permite un punto decimal.");
-    return false;
-  }
-
-  // Limitar el valor a 8 caracteres
-  if (value.length >= 8) {
-    event.preventDefault();
-    showToast("El valor no puede tener más de 8 dígitos.");
-    return false;
-  }
-};
-
-/**
- * Función de validación para texto pegado
- * @method validatePastedInput
- * @param {Event} event - El evento de pegado
- */
-const validatePastedInput = (event) => {
-  const input = event.target;
-  const paste = (event.clipboardData || window.clipboardData).getData("text");
-  const newValue = input.value + paste;
-
-  // Permitir solo números y un punto decimal
-  const regex = /^[0-9]*\.?[0-9]*$/;
-  if (!regex.test(newValue)) {
-    event.preventDefault();
-    showToast("Solo se permiten números positivos y un punto decimal.");
     return false;
   }
 
