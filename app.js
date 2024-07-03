@@ -109,20 +109,29 @@ const animate = () => {
   const spaceshipWidth = 225; // Ancho de la nave espacial
   const spaceshipHeight = 225; // Altura de la nave espacial
   const xPos = (canvas.width - spaceshipWidth) / 2;
-
-  ctx.drawImage(spaceship, xPos, positionY, spaceshipWidth, spaceshipHeight);
-
-  // Dibujar la flecha indicadora de velocidad
   const arrowSize = 20; // Tamaño de la flecha
-  drawVelocityArrow(canvas.width / 2, positionY + spaceshipHeight, arrowSize);
 
   // Verificar si la nave aún está dentro del canvas
   if (positionY < canvas.height - spaceshipHeight) {
+
     // Continuar animando si no ha llegado al suelo
+    ctx.drawImage(spaceship, xPos, positionY, spaceshipWidth, spaceshipHeight);
+
+    // Dibujar la flecha indicadora de velocidad
+    drawVelocityArrow(canvas.width / 2, positionY + spaceshipHeight, arrowSize);
+
     requestAnimationFrame(animate);
   } else {
-    // Detener la animación al llegar al suelo
-    cancelAnimationFrame(null);
+    // Ajustar positionY para que esté en el suelo
+    positionY = canvas.height - spaceshipHeight;
+
+    // Dibujar la nave espacial en el suelo
+    ctx.drawImage(spaceship, xPos, positionY, spaceshipWidth, spaceshipHeight);
+
+    // Dibujar la flecha indicadora de velocidad en el suelo
+    drawVelocityArrow(canvas.width / 2, positionY + spaceshipHeight, arrowSize);
+
+    // Mostrar el botón de animación
     document.getElementById("animate-button").style.display = "block";
   }
 };
@@ -304,7 +313,7 @@ const validateInput = (event) => {
   const input = event.target;
   const key = event.key || (event.clipboardData || window.clipboardData).getData("text");
   const newValue = input.value + key;
-  value = input.value;
+  const value = input.value;
 
   // Verificar si la tecla presionada es una letra o símbolo (excepto punto decimal y backspace)
   if (!/[0-9.]/.test(key) && key !== "Backspace") {
