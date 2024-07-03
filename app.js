@@ -176,7 +176,7 @@ const drawVelocityArrow = (x, y, size) => {
   ctx.textAlign = "center";
   ctx.fillText(
       `Velocidad: ${velocity.toFixed(2)} ${unitInit}/${
-          unitInit == "km" ? "h" : "s"
+          unitInit === "km" ? "h" : "s"
       }`,
       x,
       y - size - 5
@@ -247,9 +247,8 @@ const convertUnits = (value, currentUnit, targetUnit, conversionType) => {
   // Realizar la conversión
   const conversionFactor =
       conversionFactors[currentUnit][conversionType][targetUnit];
-  const convertedValue = value * conversionFactor;
 
-  return convertedValue;
+  return value * conversionFactor;
 };
 
 /**
