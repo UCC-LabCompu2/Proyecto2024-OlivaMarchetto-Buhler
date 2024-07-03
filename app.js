@@ -327,18 +327,3 @@ const validateInput = (event) => {
     return false;
   }
 };
-
-/**
- * Función para manejar eventos de input.
- * @function handleInput
- * @param {Event} event - El evento de input.
- */
-const handleInput = (event) => {
-  const value = event.target.value;
-  const regex = /^[0-9]*\.?[0-9]*$/;
-  if (!regex.test(value)) {
-    event.target.value = value.replace(/[^0-9.]/g, "");
-    showToast("Solo se permiten números positivos y un punto decimal.");
-    return false;
-  }
-};
